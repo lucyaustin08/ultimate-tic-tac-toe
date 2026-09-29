@@ -35,14 +35,10 @@ def upgrade() -> None:
         sa.Column("created_at", app.core.database.UTCDateTime(), nullable=False),
         sa.CheckConstraint("board BETWEEN 0 AND 8", name=op.f("ck_moves_board_range")),
         sa.CheckConstraint("cell BETWEEN 0 AND 8", name=op.f("ck_moves_cell_range")),
-        sa.ForeignKeyConstraint(
-            ["game_id"], ["games.id"], name=op.f("fk_moves_game_id_games")
-        ),
+        sa.ForeignKeyConstraint(["game_id"], ["games.id"], name=op.f("fk_moves_game_id_games")),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_moves")),
         sa.UniqueConstraint("game_id", "sequence", name=op.f("uq_moves_game_id_sequence")),
-        sa.UniqueConstraint(
-            "game_id", "board", "cell", name=op.f("uq_moves_game_id_board_cell")
-        ),
+        sa.UniqueConstraint("game_id", "board", "cell", name=op.f("uq_moves_game_id_board_cell")),
     )
 
 

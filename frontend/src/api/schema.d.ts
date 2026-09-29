@@ -82,16 +82,6 @@ export interface components {
         };
         /** GameRead */
         GameRead: {
-            /** Id */
-            id: number;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
-            status: components["schemas"]["GameStatus"];
-            winner: components["schemas"]["Player"] | null;
-            current_player: components["schemas"]["Player"] | null;
             /**
              * Active Board
              * @description The board the next move must go in, or null when any open board is allowed.
@@ -99,8 +89,18 @@ export interface components {
             active_board: number | null;
             /** Boards */
             boards: components["schemas"]["SmallBoardRead"][];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            current_player: components["schemas"]["Player"] | null;
+            /** Id */
+            id: number;
             /** Moves */
             moves: components["schemas"]["MoveRead"][];
+            status: components["schemas"]["GameStatus"];
+            winner: components["schemas"]["Player"] | null;
         };
         /**
          * GameStatus
@@ -122,18 +122,18 @@ export interface components {
         };
         /** MoveRead */
         MoveRead: {
-            /** Sequence */
-            sequence: number;
             /** Board */
             board: number;
             /** Cell */
             cell: number;
-            player: components["schemas"]["Player"];
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
+            player: components["schemas"]["Player"];
+            /** Sequence */
+            sequence: number;
         };
         /**
          * Player
@@ -142,17 +142,17 @@ export interface components {
         Player: "x" | "o";
         /** SmallBoardRead */
         SmallBoardRead: {
-            /** Index */
-            index: number;
             /** Cells */
             cells: (components["schemas"]["Player"] | null)[];
-            status: components["schemas"]["BoardStatus"];
-            winner: components["schemas"]["Player"] | null;
+            /** Index */
+            index: number;
             /**
              * Playable
              * @description Whether the next move may be played in this board.
              */
             playable: boolean;
+            status: components["schemas"]["BoardStatus"];
+            winner: components["schemas"]["Player"] | null;
         };
     };
     responses: never;

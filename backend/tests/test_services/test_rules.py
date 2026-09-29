@@ -137,9 +137,7 @@ def test_being_sent_to_a_won_board_gives_a_free_move() -> None:
 
 
 def test_being_sent_to_a_drawn_board_gives_a_free_move() -> None:
-    drawn = SmallBoard(
-        cells=(X, O, X, X, O, O, O, X, X), status=BoardStatus.DRAWN, winner=None
-    )
+    drawn = SmallBoard(cells=(X, O, X, X, O, O, O, X, X), status=BoardStatus.DRAWN, winner=None)
     state = state_with({3: drawn}, active_board=None)
     after = apply_move(state, 0, 3)  # cell 3 would send O to board 3
     assert after.active_board is None
@@ -163,9 +161,7 @@ def test_free_move_into_a_decided_board_is_refused() -> None:
 
 
 def test_three_small_boards_in_a_row_wins_the_game() -> None:
-    state = state_with(
-        {0: won_by(X), 1: won_by(X), 2: board_with("xx.......")}, active_board=2
-    )
+    state = state_with({0: won_by(X), 1: won_by(X), 2: board_with("xx.......")}, active_board=2)
     after = apply_move(state, 2, 2)
     assert after.status is GameStatus.WON
     assert after.winner is X

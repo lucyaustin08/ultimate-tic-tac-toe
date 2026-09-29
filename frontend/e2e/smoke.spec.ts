@@ -11,5 +11,7 @@ test("two players can start a game and take turns", async ({ page }) => {
 
   await page.getByRole("button", { name: /^center board, top right square/ }).click();
   await expect(page.getByText("X to move in the top right board.")).toBeVisible();
-  await expect(page.getByRole("button", { name: /^center board, top right square, O$/ })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^center board, top right square, O$/ }),
+  ).toBeVisible();
 });

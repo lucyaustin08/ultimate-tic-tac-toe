@@ -135,9 +135,11 @@ def apply_move(state: GameState, board: int, cell: int) -> GameState:
     if state.boards[board].cells[cell] is not None:
         raise RuleViolationError(CELL_OCCUPIED, "That square is already taken.")
 
-    boards = state.boards[:board] + (_place(state.boards[board], cell, player),) + state.boards[
-        board + 1 :
-    ]
+    boards = (
+        state.boards[:board]
+        + (_place(state.boards[board], cell, player),)
+        + state.boards[board + 1 :]
+    )
 
     game_winner = line_winner([small.winner for small in boards])
     if game_winner is not None:

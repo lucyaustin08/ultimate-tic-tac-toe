@@ -27,7 +27,8 @@ export function afterMove(game: Game, board: number, cell: number): Game {
   const player: Player = game.current_player ?? "x";
   const boards = game.boards.map((small) => ({
     ...small,
-    cells: small.index === board ? small.cells.map((m, i) => (i === cell ? player : m)) : small.cells,
+    cells:
+      small.index === board ? small.cells.map((m, i) => (i === cell ? player : m)) : small.cells,
     playable: small.index === cell,
   }));
   return {

@@ -45,7 +45,10 @@ export const errorHandlers = {
   getGameFailsOnce: http.get(
     `${GAMES}/:gameId`,
     () =>
-      HttpResponse.json({ code: "internal_server_error", detail: "Server error." }, { status: 500 }),
+      HttpResponse.json(
+        { code: "internal_server_error", detail: "Server error." },
+        { status: 500 },
+      ),
     { once: true },
   ),
   moveRefused: http.post(`${GAMES}/:gameId/moves`, () =>
