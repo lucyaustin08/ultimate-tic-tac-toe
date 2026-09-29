@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page: #f8fafc;
+  --color-ink: #0f172a;
+  --color-frame: #334155;
+  --color-board: #cbd5e1;
+  --color-cell: #ffffff;
+  --color-cell-hover: #e0f2fe;
+  --color-player-x: #1d4ed8;
+  --color-player-o: #b91c1c;
+  --color-action: #1d4ed8;
+  --color-action-hover: #1e40af;
+  --color-error: #b91c1c;
+  --color-focus: #f59e0b;
+}
+
+body {
+  background-color: var(--color-page);
+  color: var(--color-ink);
+}
+
+button:disabled {
+  cursor: default;
+}
