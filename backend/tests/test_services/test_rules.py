@@ -18,7 +18,7 @@ from app.services.rules import (
 )
 from tests.game_scripts import FREE_MOVE_PREFIX, X_WINS_GAME
 
-X, O = Player.X, Player.O
+X, O = Player.X, Player.O  # noqa: E741 - "O" is the player's name
 
 
 def board_with(cells: str) -> SmallBoard:
