@@ -1,0 +1,66 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../infra/docker/backend.Dockerfile
+    environment:
+      DATABASE_URL: sqlite:////app/data/ultimate_tic_tac_toe.db
+      # For PostgreSQL, uncomment the db service below and use instead:
+      # DATABASE_URL: postgresql+psycopg://tictactoe:tictactoe@db:5432/tictactoe
+    volumes:
+      - sqlite-data:/app/data
+    networks:
+      - app
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/openapi.json', timeout=2)"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../infra/docker/frontend.Dockerfile
+      additional_contexts:
+        infra: ./infra/docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  # db:
+  #   image: postgres:17
+  #   environment:
+  #     POSTGRES_USER: tictactoe
+  #     POSTGRES_PASSWORD: tictactoe
+  #     POSTGRES_DB: tictactoe
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - app
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U tictactoe"]
+  #     interval: 10s
+  #     timeout: 3s
+  #     retries: 5
+
+volumes:
+  sqlite-data:
+  # postgres-data:
+
+networks:
+  app:
