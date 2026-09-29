@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.db
+
+# Node
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+frontend/openapi.json
+
+# Environment
+.env
