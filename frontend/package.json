@@ -18,7 +18,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
-    "gen:api": "uv run --project ../backend python -m app.openapi_export > openapi.json && openapi-typescript openapi.json -o src/api/schema.d.ts",
+    "gen:api": "uv run --directory ../backend python -m app.openapi_export > openapi.json && openapi-typescript openapi.json -o src/api/schema.d.ts",
     "e2e": "playwright test"
   },
   "dependencies": {
